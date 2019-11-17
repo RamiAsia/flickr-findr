@@ -1,9 +1,12 @@
 package dev.ramiasia.bleacherflickort.ui.search
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -22,6 +25,7 @@ class SearchFragment : Fragment() {
     private lateinit var cardRecyclerView: RecyclerView
     private lateinit var imageListAdapter: SearchImagesRecyclerViewAdapter
     private lateinit var imageViewModel: SearchViewModel
+    private var currentlySearchedTerm = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,17 +44,27 @@ class SearchFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    imageViewModel.getImages()
+                    imageViewModel.getImages(currentlySearchedTerm)
                 }
             }
         })
 
-        return view
-    }
+        val editText: EditText = view.findViewById(R.id.searchEditText)
+        editText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                if (editText.text.isNotEmpty()) {
+                    currentlySearchedTerm = editText.text.toString()
+                    imageViewModel.getImages(currentlySearchedTerm)
+                    val handler = Handler()
+                    handler.postDelayed({
+                        cardRecyclerView.scrollToPosition(0)
+                    }, 1000)
+                }
+            }
+            false
+        }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        imageViewModel.getImages()
+        return view
     }
 
 }

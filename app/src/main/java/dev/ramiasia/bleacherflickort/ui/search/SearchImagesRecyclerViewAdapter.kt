@@ -1,16 +1,21 @@
 package dev.ramiasia.bleacherflickort.ui.search
 
+import ImageUtils
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import dev.ramiasia.bleacherflickort.R
 import dev.ramiasia.bleacherflickort.model.entity.SearchImage
+import dev.ramiasia.bleacherflickort.ui.PictureDetailsActivity
 
-class SearchImagesRecyclerViewAdapter(context: Context?) :
+
+class SearchImagesRecyclerViewAdapter(private val context: Context?) :
     RecyclerView.Adapter<SearchImagesRecyclerViewAdapter.ImageViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -28,8 +33,24 @@ class SearchImagesRecyclerViewAdapter(context: Context?) :
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         if (images.isNotEmpty()) {
             val image = images[position]
-            holder.imageView.setImageResource(R.drawable.ic_launcher_background)
-            holder.titleTextView.text = image.title
+            holder.titleTextView.text =
+                if (image.title.length < 40)
+                    image.title
+                else
+                    image.title.substring(0, 37) + "..."
+
+            holder.itemView.setOnClickListener {
+                val intent = Intent(PictureDetailsActivity.ACTION_DETAILS)
+                intent.putExtra(PictureDetailsActivity.EXTRA_TITLE, image.title)
+                intent.putExtra(PictureDetailsActivity.EXTRA_URI, ImageUtils.getImageUri(image))
+                context?.startActivity(intent)
+            }
+
+            Picasso.get()
+                .load(ImageUtils.getImageUri(image))
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_foreground)
+                .into(holder.imageView)
         }
     }
 
