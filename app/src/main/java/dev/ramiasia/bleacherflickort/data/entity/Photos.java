@@ -1,4 +1,4 @@
-package dev.ramiasia.bleacherflickort.model.entity;
+package dev.ramiasia.bleacherflickort.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 

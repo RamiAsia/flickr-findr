@@ -1,7 +1,12 @@
-package dev.ramiasia.bleacherflickort.model.entity;
+package dev.ramiasia.bleacherflickort.data.entity;
 
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "bookmarks")
 public class SearchImage {
+    @PrimaryKey
     public String id;
     public String title;
     public String farm;

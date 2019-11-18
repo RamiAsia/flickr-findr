@@ -1,6 +1,6 @@
 import android.net.Uri;
 
-import dev.ramiasia.bleacherflickort.model.entity.SearchImage;
+import dev.ramiasia.bleacherflickort.data.entity.SearchImage;
 
 public class ImageUtils {
 

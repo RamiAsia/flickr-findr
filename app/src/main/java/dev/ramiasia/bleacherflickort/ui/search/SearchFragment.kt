@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.ramiasia.bleacherflickort.R
-import dev.ramiasia.bleacherflickort.model.entity.SearchImage
+import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 
 
 class SearchFragment : Fragment() {

@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import dev.ramiasia.bleacherflickort.R
-import dev.ramiasia.bleacherflickort.model.entity.SearchImage
+import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.ui.PictureDetailsActivity
 
 

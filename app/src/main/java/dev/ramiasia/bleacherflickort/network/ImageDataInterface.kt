@@ -1,6 +1,6 @@
 package dev.ramiasia.bleacherflickort.network
 
-import dev.ramiasia.bleacherflickort.model.entity.ImageQuery
+import dev.ramiasia.bleacherflickort.data.entity.ImageQuery
 import retrofit2.http.GET
 import retrofit2.http.Query
 

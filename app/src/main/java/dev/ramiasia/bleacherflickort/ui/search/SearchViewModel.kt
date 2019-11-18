@@ -3,7 +3,7 @@ package dev.ramiasia.bleacherflickort.ui.search
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import dev.ramiasia.bleacherflickort.model.entity.SearchImage
+import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.network.ImageDataInterface
 import dev.ramiasia.bleacherflickort.network.RetrofitInstance
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +26,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     fun getImages(term: String) {
         if (term.isNotEmpty()) {
-            var list: ArrayList<SearchImage>?
+            val list: ArrayList<SearchImage>?
 
             if (term != lastSearchedTerm) {
                 lastSearchedTerm = term
