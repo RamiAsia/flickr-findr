@@ -38,4 +38,10 @@ class ImageRepository(application: Application) {
             dao.bookmark(image)
         }
     }
+
+    fun removeBookmarked(image: SearchImage) {
+        CoroutineScope(IO).launch {
+            dao.removeBookmarked(image)
+        }
+    }
 }

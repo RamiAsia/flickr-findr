@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import dev.ramiasia.bleacherflickort.ImageRepository
 import dev.ramiasia.bleacherflickort.R
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 
@@ -15,6 +16,7 @@ class PictureDetailsActivity : AppCompatActivity() {
 
     lateinit var imageView: ImageView
     lateinit var titleTextView: TextView
+    lateinit var image: SearchImage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,9 +26,9 @@ class PictureDetailsActivity : AppCompatActivity() {
 
     private fun init() {
 
-        val image: SearchImage? = intent.extras?.get(EXTRA_IMAGE) as SearchImage
+        image = intent.extras?.get(EXTRA_IMAGE) as SearchImage
 
-        image?.let {
+        image.let {
             imageView = findViewById(R.id.imageDetailView)
             titleTextView = findViewById(R.id.imageDetailTitle)
 
@@ -57,11 +59,14 @@ class PictureDetailsActivity : AppCompatActivity() {
     }
 
     private fun toggleBookmarkIcon(item: MenuItem) {
-        item.icon =
-            if (!item.isChecked)
-                getDrawable(R.drawable.ic_bookmark_empty)
-            else
-                getDrawable(R.drawable.ic_bookmark_filled)
+        val imageRepository = ImageRepository(application)
+        if (!item.isChecked) {
+            item.icon = getDrawable(R.drawable.ic_bookmark_empty)
+            imageRepository.removeBookmarked(image)
+        } else {
+            item.icon = getDrawable(R.drawable.ic_bookmark_filled)
+            imageRepository.bookmark(image)
+        }
     }
 
     companion object {
