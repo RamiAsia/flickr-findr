@@ -1,6 +1,6 @@
 package dev.ramiasia.bleacherflickort.ui
 
-import android.net.Uri
+import ImageUtils
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -8,8 +8,8 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.squareup.picasso.Picasso
 import dev.ramiasia.bleacherflickort.R
+import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 
 class PictureDetailsActivity : AppCompatActivity() {
 
@@ -23,15 +23,20 @@ class PictureDetailsActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        imageView = findViewById(R.id.imageDetailView)
-        titleTextView = findViewById(R.id.imageDetailTitle)
-        titleTextView.text = intent.extras?.get(EXTRA_TITLE) as String?
 
-        Picasso.get()
-            .load(intent.extras?.get(EXTRA_URI) as Uri)
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_foreground)
-            .into(imageView)
+        val image: SearchImage? = intent.extras?.get(EXTRA_IMAGE) as SearchImage
+
+        image?.let {
+            imageView = findViewById(R.id.imageDetailView)
+            titleTextView = findViewById(R.id.imageDetailTitle)
+
+            titleTextView.text = image.title
+            ImageUtils.loadImage(
+                image, imageView, R.drawable.ic_launcher_foreground, R
+                    .drawable.ic_launcher_background
+            )
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -61,7 +66,6 @@ class PictureDetailsActivity : AppCompatActivity() {
 
     companion object {
         const val ACTION_DETAILS = "dev.ramiasia.bleacherflickort.detailsactivity"
-        const val EXTRA_TITLE = "dev.ramiasia.bleacherflickort.detailsactivity.titleextra"
-        const val EXTRA_URI = "dev.ramiasia.bleacherflickort.detailsactivity.uri"
+        const val EXTRA_IMAGE = "dev.ramiasia.bleacherflickort.detailsactivity.image"
     }
 }

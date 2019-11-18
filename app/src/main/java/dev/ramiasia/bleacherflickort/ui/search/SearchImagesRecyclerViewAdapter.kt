@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import dev.ramiasia.bleacherflickort.R
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.ui.PictureDetailsActivity
@@ -41,16 +40,14 @@ class SearchImagesRecyclerViewAdapter(private val context: Context?) :
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(PictureDetailsActivity.ACTION_DETAILS)
-                intent.putExtra(PictureDetailsActivity.EXTRA_TITLE, image.title)
-                intent.putExtra(PictureDetailsActivity.EXTRA_URI, ImageUtils.getImageUri(image))
+                intent.putExtra(PictureDetailsActivity.EXTRA_IMAGE, image)
                 context?.startActivity(intent)
             }
 
-            Picasso.get()
-                .load(ImageUtils.getImageUri(image))
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_foreground)
-                .into(holder.imageView)
+            ImageUtils.loadImage(
+                image, holder.imageView, R.drawable.ic_launcher_foreground, R
+                    .drawable.ic_launcher_background
+            )
         }
     }
 
