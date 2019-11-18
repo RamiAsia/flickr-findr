@@ -45,6 +45,6 @@
         android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_bookmark" />
+        app:srcCompat="@drawable/ic_bookmark_empty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
