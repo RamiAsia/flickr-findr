@@ -2,7 +2,8 @@ package dev.ramiasia.bleacherflickort
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.FragmentManager
+import dev.ramiasia.bleacherflickort.ui.bookmarks.BookmarkFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,8 +14,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val fragmentManager: FragmentManager = supportFragmentManager
+            println("Fragments: ${fragmentManager.backStackEntryCount}")
+            val transaction = fragmentManager.beginTransaction()
+            transaction.add(R.id.fragment_container, BookmarkFragment.newInstance())
+                .addToBackStack("TAG")
+            transaction.commit()
         }
     }
 }

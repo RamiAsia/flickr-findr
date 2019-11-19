@@ -1,7 +1,23 @@
 package dev.ramiasia.bleacherflickort.ui.bookmarks;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-public class BookmarkViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import java.util.List;
+
+import dev.ramiasia.bleacherflickort.ImageRepository;
+import dev.ramiasia.bleacherflickort.data.entity.SearchImage;
+
+public class BookmarkViewModel extends AndroidViewModel {
+
+    LiveData<List<SearchImage>> images;
+    ImageRepository repository;
+
+    public BookmarkViewModel(@NonNull Application application) {
+        super(application);
+        repository = new ImageRepository(application);
+        images = repository.getBookmarks();
+    }
 }
