@@ -8,9 +8,12 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import dev.ramiasia.bleacherflickort.ImageRepository
 import dev.ramiasia.bleacherflickort.R
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
+import dev.ramiasia.bleacherflickort.ui.bookmarks.BookmarkViewModel
 
 class PictureDetailsActivity : AppCompatActivity() {
 
@@ -44,6 +47,13 @@ class PictureDetailsActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.image_details_menu, menu)
+        val viewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
+        viewModel.images.observe(this, Observer {
+            if (it.contains(image)) {
+                menu.getItem(0).icon = this.getDrawable(R.drawable.ic_bookmark_filled)
+                menu.getItem(0).isChecked = true
+            }
+        })
         return true
     }
 

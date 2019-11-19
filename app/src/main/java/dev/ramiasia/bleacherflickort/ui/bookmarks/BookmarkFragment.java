@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 import dev.ramiasia.bleacherflickort.R;
@@ -34,7 +35,6 @@ public class BookmarkFragment extends Fragment {
         recyclerView = view.findViewById(R.id.bookmarksRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         recyclerView.setAdapter(new SearchImagesRecyclerViewAdapter(getContext()));
-        viewModel = ViewModelProviders.of(this).get(BookmarkViewModel.class);
         viewModel = ViewModelProviders.of(this).get(BookmarkViewModel.class);
         viewModel.images.observe(this, new Observer<List<SearchImage>>() {
             @Override

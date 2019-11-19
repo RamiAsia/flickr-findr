@@ -1,6 +1,7 @@
 package dev.ramiasia.bleacherflickort
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import dev.ramiasia.bleacherflickort.data.BleacherFlickortDatabase
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.data.entity.SearchTerm
@@ -12,10 +13,15 @@ class ImageRepository(application: Application) {
     private val db = BleacherFlickortDatabase.invoke(application)
     private val dao = db.searchDao()
 
-    var bookmarks = dao.getBookmarks()
+    var bookmarks: LiveData<List<SearchImage>>
         private set
     var searchTerms = dao.getPreviousSearchTerms()
         private set
+
+    init {
+        bookmarks = dao.getBookmarks()
+        searchTerms = dao.getPreviousSearchTerms()
+    }
 
     /**
      * Save [SearchTerm] to database for future reference.

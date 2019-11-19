@@ -54,4 +54,18 @@ public class SearchImage implements Parcelable {
         dest.writeString(server);
         dest.writeString(secret);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof SearchImage) {
+            SearchImage image = (SearchImage) o;
+            return image.id.equals(this.id)
+                    && image.farm.equals(this.farm)
+                    && image.secret.equals(this.secret)
+                    && image.server.equals(this.server)
+                    && image.title.equals(this.title);
+        }
+
+        return false;
+    }
 }
