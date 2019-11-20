@@ -8,11 +8,14 @@ import dev.ramiasia.bleacherflickort.data.entity.SearchTerm
 @Dao
 interface SearchDao {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(term: SearchTerm)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun bookmark(image: SearchImage)
+
+    @Query("Select * from searchTerms where term like :term||'%'")
+    fun getPreviousSearchTerms(term: String): List<SearchTerm>
 
     @Query("Select * from searchTerms")
     fun getPreviousSearchTerms(): LiveData<List<SearchTerm>>

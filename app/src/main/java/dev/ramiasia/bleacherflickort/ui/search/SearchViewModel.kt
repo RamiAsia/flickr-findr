@@ -3,7 +3,9 @@ package dev.ramiasia.bleacherflickort.ui.search
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import dev.ramiasia.bleacherflickort.ImageRepository
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
+import dev.ramiasia.bleacherflickort.data.entity.SearchTerm
 import dev.ramiasia.bleacherflickort.network.ImageDataInterface
 import dev.ramiasia.bleacherflickort.network.RetrofitInstance
 import kotlinx.coroutines.CoroutineScope
@@ -21,13 +23,19 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     private var lastSearchedTerm = ""
 
+    private val imageRepository = ImageRepository(application)
+
+
     var images: MutableLiveData<ArrayList<SearchImage>> = MutableLiveData(ArrayList())
+        private set
+
+    var searchedTerms: MutableLiveData<List<SearchTerm>> = imageRepository.searchTerms
+        private set
 
 
     fun getImages(term: String) {
         if (term.isNotEmpty()) {
             val list: ArrayList<SearchImage>?
-
             if (term != lastSearchedTerm) {
                 lastSearchedTerm = term
                 list = ArrayList()
@@ -37,19 +45,22 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
             }
 
             CoroutineScope(IO).launch {
+                imageRepository.save(term)
                 val imageDataInterface = RetrofitInstance.getRetrofitInstance()
                     .create(ImageDataInterface::class.java)
-
                 val call = imageDataInterface.getImageList(
                     apiKey = API_KEY, itemCount = ITEM_COUNT,
                     term = term, page = page++
                 )
-
                 call.photos.photo?.forEach {
                     list?.add(it)
                 }
+                images.postValue(list)
             }
-            images.value = list
         }
+    }
+
+    fun searchTermsLike(term: String) {
+        imageRepository.getPreviouslySearchedTermsLike(term)
     }
 }

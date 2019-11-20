@@ -10,17 +10,6 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "bookmarks")
 public class SearchImage implements Parcelable {
-    public static final Creator<SearchImage> CREATOR = new Creator<SearchImage>() {
-        @Override
-        public SearchImage createFromParcel(Parcel in) {
-            return new SearchImage(in);
-        }
-
-        @Override
-        public SearchImage[] newArray(int size) {
-            return new SearchImage[size];
-        }
-    };
     public String title;
     public String farm;
     public String server;
@@ -54,6 +43,18 @@ public class SearchImage implements Parcelable {
         dest.writeString(server);
         dest.writeString(secret);
     }
+
+    public static final Creator<SearchImage> CREATOR = new Creator<SearchImage>() {
+        @Override
+        public SearchImage createFromParcel(Parcel in) {
+            return new SearchImage(in);
+        }
+
+        @Override
+        public SearchImage[] newArray(int size) {
+            return new SearchImage[size];
+        }
+    };
 
     @Override
     public boolean equals(Object o) {

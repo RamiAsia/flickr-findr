@@ -10,7 +10,7 @@ import dev.ramiasia.bleacherflickort.data.entity.SearchTerm
 
 @Database(
     entities = [SearchImage::class, SearchTerm::class],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class BleacherFlickortDatabase : RoomDatabase() {

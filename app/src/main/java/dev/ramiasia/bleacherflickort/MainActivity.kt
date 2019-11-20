@@ -11,7 +11,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
+//        supportActionBar?.hide()
+        setTheme(R.style.AppTheme_NoActionBar)
 
         fab.setOnClickListener { view ->
             val fragmentManager: FragmentManager = supportFragmentManager

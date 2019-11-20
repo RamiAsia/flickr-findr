@@ -2,6 +2,7 @@ package dev.ramiasia.bleacherflickort
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import dev.ramiasia.bleacherflickort.data.BleacherFlickortDatabase
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.data.entity.SearchTerm
@@ -15,23 +16,41 @@ class ImageRepository(application: Application) {
 
     var bookmarks: LiveData<List<SearchImage>>
         private set
-    var searchTerms = dao.getPreviousSearchTerms()
+    var searchTerms: MutableLiveData<List<SearchTerm>> = MutableLiveData()
         private set
 
     init {
         bookmarks = dao.getBookmarks()
-        searchTerms = dao.getPreviousSearchTerms()
+//        searchTerms = dao.getPreviousSearchTerms("")
     }
 
     /**
      * Save [SearchTerm] to database for future reference.
      *
-     * @param searchTerm    Term to save.
+     * @param term    Term to save.
      */
-    fun save(searchTerm: SearchTerm) {
+    fun save(term: String) {
         CoroutineScope(IO).launch {
-            dao.insert(searchTerm)
+            dao.insert(SearchTerm(term))
         }
+    }
+
+    /**
+     * Obtains a list of searched terms starting with the passed [String]
+     *
+     * @param term  The term to be searched for.
+     */
+    fun getPreviouslySearchedTermsLike(term: String) {
+        CoroutineScope(IO).launch {
+            if (term.isNotBlank()) {
+                var terms = dao.getPreviousSearchTerms(term)
+                println("Retrieved ${terms.size} terms")
+                searchTerms.postValue(terms)
+            } else {
+                searchTerms.postValue(ArrayList())
+            }
+        }
+
     }
 
     /**

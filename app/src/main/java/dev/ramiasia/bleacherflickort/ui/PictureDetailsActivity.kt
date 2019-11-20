@@ -17,9 +17,9 @@ import dev.ramiasia.bleacherflickort.ui.bookmarks.BookmarkViewModel
 
 class PictureDetailsActivity : AppCompatActivity() {
 
-    lateinit var imageView: ImageView
-    lateinit var titleTextView: TextView
-    lateinit var image: SearchImage
+    private lateinit var imageView: ImageView
+    private lateinit var titleTextView: TextView
+    private lateinit var image: SearchImage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

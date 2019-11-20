@@ -5,7 +5,13 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "searchTerms")
 data class SearchTerm(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    @PrimaryKey
     val term: String
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        return if (other!!::class == this::class)
+            (other as SearchTerm).term == this.term
+        else
+            super.equals(other)
+    }
+}
