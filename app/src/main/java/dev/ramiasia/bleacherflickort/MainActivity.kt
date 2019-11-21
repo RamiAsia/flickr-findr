@@ -15,10 +15,9 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener {
             val fragmentManager: FragmentManager = supportFragmentManager
-            println("Fragments: ${fragmentManager.backStackEntryCount}")
             val transaction = fragmentManager.beginTransaction()
             transaction.add(R.id.fragment_container, BookmarkFragment.newInstance())
-                .addToBackStack("TAG")
+                .addToBackStack(BookmarkFragment::class.simpleName)
             transaction.commit()
             fab.hide()
         }
