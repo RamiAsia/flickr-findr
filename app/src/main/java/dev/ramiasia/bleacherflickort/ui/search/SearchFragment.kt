@@ -94,6 +94,7 @@ class SearchFragment : Fragment(), SearchedTermsRecyclerViewAdapter.OnSearchTerm
 
     override fun onSearchTermPressed(searchTerm: String) {
         editText.setText(searchTerm)
+        editText.setSelection(searchTerm.length)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

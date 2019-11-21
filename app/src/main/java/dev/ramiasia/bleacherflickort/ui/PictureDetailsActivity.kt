@@ -28,10 +28,10 @@ class PictureDetailsActivity : AppCompatActivity() {
     }
 
     private fun init() {
-
         image = intent.extras?.get(EXTRA_IMAGE) as SearchImage
 
         image.let {
+            supportActionBar?.title = image.title
             imageView = findViewById(R.id.imageDetailView)
             titleTextView = findViewById(R.id.imageDetailTitle)
 
