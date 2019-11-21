@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.maximeroussy.invitrode.WordGenerator
 import dev.ramiasia.bleacherflickort.R
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 
@@ -44,7 +45,7 @@ class SearchFragment : Fragment(), SearchedTermsRecyclerViewAdapter.OnSearchTerm
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    imageViewModel.getImages(currentlySearchedTerm)
+                    imageViewModel.getImages(currentlySearchedTerm, false)
                 }
             }
         })
@@ -76,7 +77,7 @@ class SearchFragment : Fragment(), SearchedTermsRecyclerViewAdapter.OnSearchTerm
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
                 if (editText.text.isNotEmpty()) {
                     currentlySearchedTerm = editText.text.toString()
-                    imageViewModel.getImages(currentlySearchedTerm)
+                    imageViewModel.getImages(currentlySearchedTerm, false)
                     searchTermsListAdapter.terms = ArrayList()
                 }
             }
@@ -93,6 +94,12 @@ class SearchFragment : Fragment(), SearchedTermsRecyclerViewAdapter.OnSearchTerm
 
     override fun onSearchTermPressed(searchTerm: String) {
         editText.setText(searchTerm)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        currentlySearchedTerm = WordGenerator().newWord(5)
+        imageViewModel.getImages(currentlySearchedTerm, true)
     }
 
 }

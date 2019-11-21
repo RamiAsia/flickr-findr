@@ -33,7 +33,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         private set
 
 
-    fun getImages(term: String) {
+    fun getImages(term: String, incognito: Boolean) {
         if (term.isNotEmpty()) {
             val list: ArrayList<SearchImage>?
             if (term != lastSearchedTerm) {
@@ -45,7 +45,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
             }
 
             CoroutineScope(IO).launch {
-                imageRepository.save(term)
+                if (!incognito) imageRepository.save(term)
                 val imageDataInterface = RetrofitInstance.getRetrofitInstance()
                     .create(ImageDataInterface::class.java)
                 val call = imageDataInterface.getImageList(
