@@ -69,4 +69,6 @@ dependencies {
 
     // optional - Guava support for Room, including Optional and ListenableFuture
     implementation "androidx.room:room-guava:$room_version"
+
+    implementation 'com.maximeroussy.invitrode:invitrode:2.0.1'
 }

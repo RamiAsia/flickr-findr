@@ -11,17 +11,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        setSupportActionBar(toolbar)
-//        supportActionBar?.hide()
         setTheme(R.style.AppTheme_NoActionBar)
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
             val fragmentManager: FragmentManager = supportFragmentManager
             println("Fragments: ${fragmentManager.backStackEntryCount}")
             val transaction = fragmentManager.beginTransaction()
             transaction.add(R.id.fragment_container, BookmarkFragment.newInstance())
                 .addToBackStack("TAG")
             transaction.commit()
+            fab.hide()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        fab.show()
     }
 }
