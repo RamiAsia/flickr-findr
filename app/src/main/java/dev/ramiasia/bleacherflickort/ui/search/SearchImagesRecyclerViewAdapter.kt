@@ -1,6 +1,5 @@
 package dev.ramiasia.bleacherflickort.ui.search
 
-import ImageUtils
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import dev.ramiasia.bleacherflickort.ImageUtils
 import dev.ramiasia.bleacherflickort.R
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.ui.PictureDetailsActivity
