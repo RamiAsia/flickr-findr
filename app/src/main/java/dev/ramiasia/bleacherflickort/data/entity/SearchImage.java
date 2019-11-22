@@ -22,6 +22,14 @@ public class SearchImage implements Parcelable {
 
     }
 
+    public SearchImage(String id, String title, String farm, String server, String secret) {
+        this.id = id;
+        this.farm = farm;
+        this.title = title;
+        this.server = server;
+        this.secret = secret;
+    }
+
     protected SearchImage(Parcel in) {
         id = in.readString();
         title = in.readString();
