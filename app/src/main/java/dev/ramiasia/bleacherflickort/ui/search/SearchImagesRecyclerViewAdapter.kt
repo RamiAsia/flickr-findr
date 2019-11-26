@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import dev.ramiasia.bleacherflickort.ImageUtils
 import dev.ramiasia.bleacherflickort.R
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.ui.PictureDetailsActivity
+import dev.ramiasia.bleacherflickort.utils.ImageUtils
 
 
 class SearchImagesRecyclerViewAdapter(private val context: Context?) :

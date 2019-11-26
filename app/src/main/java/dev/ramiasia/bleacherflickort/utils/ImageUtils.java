@@ -1,4 +1,4 @@
-package dev.ramiasia.bleacherflickort;
+package dev.ramiasia.bleacherflickort.utils;
 
 import android.net.Uri;
 import android.widget.ImageView;

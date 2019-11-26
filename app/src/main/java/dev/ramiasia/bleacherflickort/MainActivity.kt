@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
             val fragmentManager: FragmentManager = supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
             transaction.add(R.id.fragment_container, BookmarkFragment.newInstance())
-                .addToBackStack(BookmarkFragment::class.simpleName)
+                .addToBackStack(BookmarkFragment::class.java.simpleName)
             transaction.commit()
             fab.hide()
         }

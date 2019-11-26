@@ -4,18 +4,16 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SmallTest
 import dev.ramiasia.bleacherflickort.data.BleacherFlickortDatabase
 import dev.ramiasia.bleacherflickort.data.SearchDao
-import dev.ramiasia.bleacherflickort.data.entity.SearchImage
+import dev.ramiasia.bleacherflickort.utils.TestUtils
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-@SmallTest
-class SearchImageReadWriteTest {
+class BleacherFlickortDatabaseTest {
 
     private lateinit var bleacherFlickortDatabase: BleacherFlickortDatabase
     private lateinit var searchDao: SearchDao
@@ -29,22 +27,23 @@ class SearchImageReadWriteTest {
     }
 
     @Test
-    fun writeSearchImageAndReadFromList() {
-        val image = SearchImage(
-            "0",
-            "Title",
-            "1100",
-            "dev",
-            "w2e3r4"
-        )
+    fun writeImageAndReadFromList() {
+        val image = TestUtils.getTestImage()
 
         searchDao.bookmark(image)
-        assert(searchDao.getBookmarks().value?.get(0) != null)
+        searchDao.getBookmarks().value?.get(0)?.equals(image)?.let { assert(it) }
+    }
+
+    @Test
+    fun writeSearchTermAndReadFromList() {
+        val searchTerm = TestUtils.getTestSearchTerm()
+        searchDao.insert(searchTerm)
+        assert(searchDao.getPreviousSearchTerms().value?.get(0) != null)
+        searchDao.getPreviousSearchTerms().value?.get(0)?.let { assert(it == searchTerm) }
     }
 
     @After
     fun finish() {
         bleacherFlickortDatabase.close()
     }
-
 }

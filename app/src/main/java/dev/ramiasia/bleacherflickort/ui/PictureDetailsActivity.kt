@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import dev.ramiasia.bleacherflickort.ImageRepository
-import dev.ramiasia.bleacherflickort.ImageUtils
 import dev.ramiasia.bleacherflickort.R
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.ui.bookmarks.BookmarkViewModel
+import dev.ramiasia.bleacherflickort.utils.ImageUtils
 
 class PictureDetailsActivity : AppCompatActivity() {
 

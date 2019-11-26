@@ -21,7 +21,6 @@ class ImageRepository(application: Application) {
 
     init {
         bookmarks = dao.getBookmarks()
-//        searchTerms = dao.getPreviousSearchTerms("")
     }
 
     /**
