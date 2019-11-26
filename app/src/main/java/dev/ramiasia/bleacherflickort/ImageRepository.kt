@@ -63,6 +63,11 @@ class ImageRepository(application: Application) {
         }
     }
 
+    /**
+     * Removes a [SearchImage] object from the database.
+     *
+     * @param image Image to be removed from database.
+     */
     fun removeBookmarked(image: SearchImage) {
         CoroutineScope(IO).launch {
             dao.removeBookmarked(image)

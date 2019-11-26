@@ -22,7 +22,9 @@ class BleacherFlickortDatabaseTest {
     fun setup() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         bleacherFlickortDatabase =
-            Room.inMemoryDatabaseBuilder(context, BleacherFlickortDatabase::class.java).build()
+            Room.inMemoryDatabaseBuilder(context, BleacherFlickortDatabase::class.java)
+                .allowMainThreadQueries()
+                .build()
         searchDao = bleacherFlickortDatabase.searchDao()
     }
 

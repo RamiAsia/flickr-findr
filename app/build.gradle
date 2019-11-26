@@ -68,11 +68,13 @@ dependencies {
     implementation 'com.maximeroussy.invitrode:invitrode:2.0.1'
 
     testImplementation 'org.mockito:mockito-core:3.1.0'
+    androidTestImplementation 'org.mockito:mockito-core:3.1.0'
     testImplementation('org.robolectric:robolectric:4.3.1') {
         // https://github.com/robolectric/robolectric/issues/5245
         exclude group: 'com.google.auto.service', module: 'auto-service'
     }
     testImplementation 'androidx.test:core:1.2.0'
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
 
 
 }
