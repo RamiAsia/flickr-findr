@@ -1,6 +1,8 @@
-package dev.ramiasia.bleacherflickort.network;
+package dev.ramiasia.bleacherflickort;
 
 import org.junit.Test;
+
+import dev.ramiasia.bleacherflickort.network.RetrofitInstance;
 
 public class RetrofitInstanceTest {
 

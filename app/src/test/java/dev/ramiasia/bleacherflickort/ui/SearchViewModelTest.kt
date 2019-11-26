@@ -43,6 +43,7 @@ class SearchViewModelTest {
         //And a new list of images is posted through the LiveData:
         val newImages = ArrayList<SearchImage>()
         newImages.add(TestUtils.getTestImage())
+        searchViewModel.getImages("", true)
         searchViewModel.images.postValue(newImages)
 
         //Then the observer should be notified of the new values:
