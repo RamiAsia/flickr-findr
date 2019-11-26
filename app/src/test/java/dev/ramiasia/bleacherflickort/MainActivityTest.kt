@@ -13,6 +13,7 @@ import org.robolectric.RobolectricTestRunner
 class MainActivityTest {
 
     lateinit var mainActivity: MainActivity
+    lateinit var fab: FloatingActionButton
 
     @Before
     fun setup() {
@@ -20,6 +21,8 @@ class MainActivityTest {
             .create()
             .resume()
             .get()
+
+        fab = mainActivity.findViewById<FloatingActionButton>(R.id.fab)
     }
 
     @Test
@@ -35,8 +38,6 @@ class MainActivityTest {
     @Test
     fun mainActivity_whenFabPressed_HidesItself() {
         //Given a floating action button
-        val fab = mainActivity.findViewById<FloatingActionButton>(R.id.fab)
-
         //When the button is pressed
         fab.performClick()
 
@@ -47,8 +48,6 @@ class MainActivityTest {
     @Test
     fun mainActivity_whenFabPressed_BookmarksShow() {
         //Given a floating action button
-        val fab = mainActivity.findViewById<FloatingActionButton>(R.id.fab)
-
         //When the button is pressed
         fab.performClick()
 
@@ -59,8 +58,6 @@ class MainActivityTest {
     @Test
     fun mainActivity_whenReturningToSearchFragment_FabAppears() {
         //Given a floating action button in the MainActivity
-        val fab = mainActivity.findViewById<FloatingActionButton>(R.id.fab)
-
         //When the button is pressed and the user is shown the Bookmark fragment
         fab.performClick()
 
