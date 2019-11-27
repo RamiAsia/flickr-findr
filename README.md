@@ -1,5 +1,5 @@
 # Bleacher Flickort
-Teeny Android app that displays photos returned from the Flickr search API.
+Android app to search through photos returned from the Flickr search API.
 
 * Search for images!
 * Bookmark them for viewing later!
