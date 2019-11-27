@@ -11,6 +11,9 @@ import java.util.List;
 import dev.ramiasia.bleacherflickort.ImageRepository;
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage;
 
+/**
+ * ViewModel class with {@link LiveData} containing bookmarked images.
+ */
 public class BookmarkViewModel extends AndroidViewModel {
 
     public LiveData<List<SearchImage>> images;
@@ -18,7 +21,11 @@ public class BookmarkViewModel extends AndroidViewModel {
 
     public BookmarkViewModel(@NonNull Application application) {
         super(application);
+
+        //Instantiate the repository from which we obtain the images.
         repository = new ImageRepository(application);
+
+        //Set our images to come through the repo's bookmark retreival.
         images = repository.getBookmarks();
     }
 }

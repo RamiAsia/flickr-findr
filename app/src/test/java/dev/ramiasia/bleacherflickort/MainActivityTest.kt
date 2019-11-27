@@ -22,7 +22,7 @@ class MainActivityTest {
             .resume()
             .get()
 
-        fab = mainActivity.findViewById<FloatingActionButton>(R.id.fab)
+        fab = mainActivity.findViewById(R.id.fab)
     }
 
     @Test

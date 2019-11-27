@@ -31,14 +31,13 @@ class PictureDetailsActivity : AppCompatActivity() {
         image = intent.extras?.get(EXTRA_IMAGE) as SearchImage
 
         image.let {
-            supportActionBar?.title = image.title
+            supportActionBar?.title = it.title
             imageView = findViewById(R.id.imageDetailView)
             titleTextView = findViewById(R.id.imageDetailTitle)
-
-            titleTextView.text = image.title
+            titleTextView.text = it.title
             ImageUtils.loadImage(
-                image, imageView, R.drawable.ic_launcher_foreground, R
-                    .drawable.ic_launcher_background
+                it, imageView, R.drawable.ic_launcher_foreground,
+                R.drawable.ic_launcher_background
             )
         }
 
