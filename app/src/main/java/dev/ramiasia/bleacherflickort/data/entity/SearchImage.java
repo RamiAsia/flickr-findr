@@ -8,6 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Entity containing details about searched images.
+ */
 @Entity(tableName = "bookmarks")
 public class SearchImage implements Parcelable {
     public String title;

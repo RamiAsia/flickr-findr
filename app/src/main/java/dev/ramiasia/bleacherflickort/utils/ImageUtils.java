@@ -7,6 +7,9 @@ import com.squareup.picasso.Picasso;
 
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage;
 
+/**
+ * Class containing methods pertaining to the loading of images.
+ */
 public class ImageUtils {
 
     public static void loadImage(SearchImage image, ImageView view, int errorResId,

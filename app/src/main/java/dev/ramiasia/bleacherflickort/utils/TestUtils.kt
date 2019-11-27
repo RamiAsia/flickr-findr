@@ -3,6 +3,9 @@ package dev.ramiasia.bleacherflickort.utils
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.data.entity.SearchTerm
 
+/**
+ * Class containing methods for cleaner test code.
+ */
 class TestUtils {
     companion object {
         private val helloWorld = "Hello World!"

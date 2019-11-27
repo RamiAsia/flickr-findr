@@ -5,6 +5,9 @@ import androidx.room.*
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.data.entity.SearchTerm
 
+/**
+ * Data access object used in the database.
+ */
 @Dao
 interface SearchDao {
 

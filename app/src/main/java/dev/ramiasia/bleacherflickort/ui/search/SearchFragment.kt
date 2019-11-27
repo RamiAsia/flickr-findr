@@ -17,7 +17,9 @@ import com.maximeroussy.invitrode.WordGenerator
 import dev.ramiasia.bleacherflickort.R
 import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 
-
+/**
+ * Fragment allowing users to search for and see images.
+ */
 class SearchFragment : Fragment(), SearchedTermsRecyclerViewAdapter.OnSearchTermPressedListener {
 
     private lateinit var cardRecyclerView: RecyclerView

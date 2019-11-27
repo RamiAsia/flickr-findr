@@ -3,6 +3,9 @@ package dev.ramiasia.bleacherflickort.data.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Entity containing details about searched terms.
+ */
 @Entity(tableName = "searchTerms")
 data class SearchTerm(
     @PrimaryKey

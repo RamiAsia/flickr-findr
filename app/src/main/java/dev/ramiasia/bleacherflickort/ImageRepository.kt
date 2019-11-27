@@ -10,6 +10,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
+/**
+ * Repository for obtaining image data.
+ */
 class ImageRepository(application: Application) {
     private val db = BleacherFlickortDatabase.invoke(application)
     private val dao = db.searchDao()

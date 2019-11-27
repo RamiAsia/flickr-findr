@@ -15,11 +15,14 @@ import dev.ramiasia.bleacherflickort.data.entity.SearchImage
 import dev.ramiasia.bleacherflickort.ui.bookmarks.BookmarkViewModel
 import dev.ramiasia.bleacherflickort.utils.ImageUtils
 
+/**
+ * Activity displaying the details of a given [SearchImage] object.
+ */
 class PictureDetailsActivity : AppCompatActivity() {
 
-    private lateinit var imageView: ImageView
-    private lateinit var titleTextView: TextView
-    private lateinit var image: SearchImage
+    private lateinit var imageView: ImageView   //ImageView displaying the image.
+    private lateinit var titleTextView: TextView    //Title of the image
+    private lateinit var image: SearchImage     //SearchImage object
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +31,10 @@ class PictureDetailsActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        //Get the image from the intent.
         image = intent.extras?.get(EXTRA_IMAGE) as SearchImage
 
+        //Set the UI elements based on the properties of the image
         image.let {
             supportActionBar?.title = it.title
             imageView = findViewById(R.id.imageDetailView)
@@ -45,9 +50,12 @@ class PictureDetailsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
+        //Inflate the options menu containing the bookmark icon
         inflater.inflate(R.menu.image_details_menu, menu)
+        //Set the bookmark icon according to whether the image is bookmarked or not.
         val viewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
         viewModel.images.observe(this, Observer {
+            //If the image is bookmarked, make the bookmark icon filled. Icon is outlined otherwise.
             if (it.contains(image)) {
                 menu.getItem(0).icon = this.getDrawable(R.drawable.ic_bookmark_filled)
                 menu.getItem(0).isChecked = true
@@ -58,16 +66,20 @@ class PictureDetailsActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            //When the bookmark icon is pressed,
             R.id.imageDetailsMenu -> {
                 item.isChecked = !item.isChecked
-                toggleBookmarkIcon(item)
+                toggleBookmark(item)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun toggleBookmarkIcon(item: MenuItem) {
+    /**
+     * Method bookmarking/unbookmarking [SearchImage] object.
+     */
+    private fun toggleBookmark(item: MenuItem) {
         val imageRepository = ImageRepository(application)
         if (!item.isChecked) {
             item.icon = getDrawable(R.drawable.ic_bookmark_empty)
