@@ -5,6 +5,9 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Instance of Retrofit library for turning REST API into Java interfaces.
+ */
 public class RetrofitInstance {
 
     private static final String BASE_URL = "https://www.flickr.com/services/";
