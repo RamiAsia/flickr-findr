@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setTheme(R.style.AppTheme_NoActionBar)
-
+        supportActionBar?.hide()
+        supportActionBar?.title = getString(R.string.bookmarks)
         //Set the listener for interaction with the floating action button
         fab.setOnClickListener {
             //When the FAB is pressed, load the Bookmarks Fragment
@@ -26,12 +26,14 @@ class MainActivity : AppCompatActivity() {
             transaction.commit()
             //Hide the FAB when loading the Bookmarks Fragment
             fab.hide()
+            supportActionBar?.show()
         }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        //Show the FAB again when returning from the Bookmarks Fragment
+        //Show the FAB and hide the action bar again when returning from the Bookmarks Fragment
         fab.show()
+        supportActionBar?.hide()
     }
 }
