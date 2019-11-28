@@ -1,4 +1,4 @@
-# Bleacher Flickort
+# Flickr Findr
 Android app to search through photos returned from the Flickr search API.
 
 * Search for images and scroll through images to your heart's intent!  
