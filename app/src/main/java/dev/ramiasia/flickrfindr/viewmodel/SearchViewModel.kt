@@ -1,13 +1,13 @@
-package dev.ramiasia.flickrfindr.ui.search
+package dev.ramiasia.flickrfindr.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import dev.ramiasia.flickrfindr.ImageRepository
 import dev.ramiasia.flickrfindr.data.entity.SearchImage
 import dev.ramiasia.flickrfindr.data.entity.SearchTerm
 import dev.ramiasia.flickrfindr.network.ImageDataInterface
 import dev.ramiasia.flickrfindr.network.RetrofitInstance
+import dev.ramiasia.flickrfindr.repo.ImageRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -25,7 +25,8 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     private var lastSearchedTerm = ""
 
-    private val imageRepository = ImageRepository(application)
+    private val imageRepository =
+        ImageRepository(application)
 
 
     //LiveData holding a list of SearchImages

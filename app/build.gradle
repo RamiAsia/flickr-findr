@@ -65,9 +65,6 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 
-    //Word Generator
-    implementation 'com.maximeroussy.invitrode:invitrode:2.0.1'
-
     //Testing
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'

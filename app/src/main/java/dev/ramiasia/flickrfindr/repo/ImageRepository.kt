@@ -1,4 +1,4 @@
-package dev.ramiasia.flickrfindr
+package dev.ramiasia.flickrfindr.repo
 
 import android.app.Application
 import androidx.lifecycle.LiveData

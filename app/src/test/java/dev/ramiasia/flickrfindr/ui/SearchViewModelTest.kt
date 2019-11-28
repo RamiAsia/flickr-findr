@@ -3,8 +3,8 @@ package dev.ramiasia.flickrfindr.ui
 import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import dev.ramiasia.flickrfindr.data.entity.SearchImage
-import dev.ramiasia.flickrfindr.ui.search.SearchViewModel
 import dev.ramiasia.flickrfindr.utils.TestUtils
+import dev.ramiasia.flickrfindr.viewmodel.SearchViewModel
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

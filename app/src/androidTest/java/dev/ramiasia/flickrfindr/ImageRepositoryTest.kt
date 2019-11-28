@@ -2,12 +2,16 @@ package dev.ramiasia.flickrfindr
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import dev.ramiasia.flickrfindr.repo.ImageRepository
 import dev.ramiasia.flickrfindr.utils.TestUtils
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class ImageRepositoryTest {
 
     lateinit var imageRepository: ImageRepository
@@ -17,7 +21,8 @@ class ImageRepositoryTest {
 
     @Before
     fun setUp() {
-        imageRepository = ImageRepository(ApplicationProvider.getApplicationContext())
+        imageRepository =
+            ImageRepository(ApplicationProvider.getApplicationContext())
     }
 
     @Test

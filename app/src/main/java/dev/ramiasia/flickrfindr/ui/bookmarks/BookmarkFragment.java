@@ -18,6 +18,7 @@ import java.util.List;
 import dev.ramiasia.flickrfindr.R;
 import dev.ramiasia.flickrfindr.data.entity.SearchImage;
 import dev.ramiasia.flickrfindr.ui.search.SearchImagesRecyclerViewAdapter;
+import dev.ramiasia.flickrfindr.viewmodel.BookmarkViewModel;
 
 /**
  * Fragment displaying the user's bookmarked {@link SearchImage} objects.

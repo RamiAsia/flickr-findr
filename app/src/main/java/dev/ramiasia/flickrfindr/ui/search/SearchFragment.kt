@@ -13,9 +13,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.maximeroussy.invitrode.WordGenerator
 import dev.ramiasia.flickrfindr.R
 import dev.ramiasia.flickrfindr.data.entity.SearchImage
+import dev.ramiasia.flickrfindr.viewmodel.SearchViewModel
 
 /**
  * Fragment allowing users to search for and see images.
@@ -123,8 +123,8 @@ class SearchFragment : Fragment(), SearchedTermsRecyclerViewAdapter.OnSearchTerm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Upon initial loading of the fragment, load a set of images to show the user.
-        //The random word searched is 5 letters long and is not saved in the user's history.
-        currentlySearchedTerm = WordGenerator().newWord(5)
+        //The default images load as a result of searching "Landscape"
+        currentlySearchedTerm = getString(R.string.landscape)
         imageViewModel.getImages(currentlySearchedTerm, true)
     }
 

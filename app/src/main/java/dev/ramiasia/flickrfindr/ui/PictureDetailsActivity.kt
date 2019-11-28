@@ -9,11 +9,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import dev.ramiasia.flickrfindr.ImageRepository
 import dev.ramiasia.flickrfindr.R
 import dev.ramiasia.flickrfindr.data.entity.SearchImage
-import dev.ramiasia.flickrfindr.ui.bookmarks.BookmarkViewModel
+import dev.ramiasia.flickrfindr.repo.ImageRepository
 import dev.ramiasia.flickrfindr.utils.ImageUtils
+import dev.ramiasia.flickrfindr.viewmodel.BookmarkViewModel
 
 /**
  * Activity displaying the details of a given [SearchImage] object.
@@ -80,7 +80,8 @@ class PictureDetailsActivity : AppCompatActivity() {
      * Method bookmarking/unbookmarking [SearchImage] object.
      */
     private fun toggleBookmark(item: MenuItem) {
-        val imageRepository = ImageRepository(application)
+        val imageRepository =
+            ImageRepository(application)
         if (!item.isChecked) {
             item.icon = getDrawable(R.drawable.ic_bookmark_empty)
             imageRepository.removeBookmarked(image)
