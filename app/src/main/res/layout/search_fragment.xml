@@ -78,7 +78,7 @@
                 android:layout_width="37dp"
                 android:layout_height="37dp"
                 android:layout_marginEnd="6dp"
-                android:src="@drawable/ic_flickr"
+                android:src="@drawable/ic_flickr_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

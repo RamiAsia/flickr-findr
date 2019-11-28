@@ -5,7 +5,7 @@
         android:id="@+id/imageDetailsMenu"
         android:checkable="true"
         android:checked="false"
-        android:icon="@drawable/ic_bookmark_state_list"
-        android:title="TODO"
+        android:icon="@drawable/ic_bookmark_empty"
+        android:title="@string/bookmarks"
         app:showAsAction="always" />
 </menu>
