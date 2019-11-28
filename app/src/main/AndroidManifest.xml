@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="dev.ramiasia.bleacherflickort">
+    package="dev.ramiasia.flickrfindr">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,14 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.PictureDetailsActivity">
+        <activity android:name="dev.ramiasia.flickrfindr.ui.PictureDetailsActivity">
             <intent-filter>
-                <action android:name="dev.ramiasia.bleacherflickort.detailsactivity" />
+                <action android:name="dev.ramiasia.flickrfindr.detailsactivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="dev.ramiasia.flickrfindr.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
