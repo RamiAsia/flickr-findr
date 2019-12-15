@@ -11,6 +11,8 @@ import dev.ramiasia.flickrfindr.repo.ImageRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 /**
  * ViewModel for searching for [SearchImage] and [SearchTerm] objects.
@@ -61,15 +63,28 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 if (!incognito) imageRepository.save(term)
                 val imageDataInterface = RetrofitInstance.getRetrofitInstance()
                     .create(ImageDataInterface::class.java)
-                val call = imageDataInterface.getImageList(
-                    apiKey = API_KEY, itemCount = ITEM_COUNT,
-                    term = term, page = page++
-                )
-                call.photos.photo?.forEach {
-                    list?.add(it)
+                try {
+                    val call = imageDataInterface.getImageList(
+                        apiKey = API_KEY, itemCount = ITEM_COUNT,
+                        term = term, page = page++
+                    )
+
+                    call.photos.photo?.forEach {
+                        list?.add(it)
+                    }
+                    //Post the new list to the images LiveData object.
+                    images.postValue(list)
+
+                } catch (e: Exception) {
+                    when (e) {
+                        is UnknownHostException, is SocketTimeoutException -> {
+                            println("Error accessing host.")
+                        }
+                        else -> throw e
+                    }
                 }
-                //Post the new list to the images LiveData object.
-                images.postValue(list)
+
+
             }
         }
     }
