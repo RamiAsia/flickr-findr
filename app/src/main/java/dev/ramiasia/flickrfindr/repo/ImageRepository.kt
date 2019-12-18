@@ -1,29 +1,29 @@
 package dev.ramiasia.flickrfindr.repo
 
+//import dev.ramiasia.flickrfindr.data.FlickrFindrDatabase
 import android.app.Application
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import dev.ramiasia.flickrfindr.data.FlickrFindrDatabase
 import dev.ramiasia.flickrfindr.data.entity.SearchImage
 import dev.ramiasia.flickrfindr.data.entity.SearchTerm
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
+import io.realm.Realm
 
 /**
  * Repository for obtaining image data.
  */
 class ImageRepository(application: Application) {
-    private val db = FlickrFindrDatabase.invoke(application)
-    private val dao = db.searchDao()
-
-    var bookmarks: LiveData<List<SearchImage>>
+    var bookmarks: MutableLiveData<List<SearchImage>> = MutableLiveData()
         private set
     var searchTerms: MutableLiveData<List<SearchTerm>> = MutableLiveData()
         private set
 
+
+    // Get a Realm instance for this thread
+    private val realm: Realm = Realm.getDefaultInstance()
+
     init {
-        bookmarks = dao.getBookmarks()
+        var bookmarksRealm = realm.where(SearchImage::class.java).findAll()
+        bookmarks.postValue(bookmarksRealm.toList())
+
     }
 
     /**
@@ -32,9 +32,11 @@ class ImageRepository(application: Application) {
      * @param term    Term to save.
      */
     fun save(term: String) {
-        CoroutineScope(IO).launch {
-            dao.insert(SearchTerm(term))
+//        CoroutineScope(IO).launch {
+        Realm.getDefaultInstance().executeTransactionAsync {
+            it.copyToRealm(SearchTerm(term))
         }
+//        }
     }
 
     /**
@@ -43,15 +45,16 @@ class ImageRepository(application: Application) {
      * @param term  The term to be searched for.
      */
     fun getPreviouslySearchedTermsLike(term: String) {
-        CoroutineScope(IO).launch {
+//        CoroutineScope(IO).launch {
             if (term.isNotBlank()) {
-                val terms = dao.getPreviousSearchTerms(term)
+                val terms = Realm.getDefaultInstance().where((SearchTerm::class.java))
+                    .beginsWith("term", term).findAll().toList()
                 println("Retrieved ${terms.size} terms")
                 searchTerms.postValue(terms)
             } else {
                 searchTerms.postValue(ArrayList())
             }
-        }
+//        }
 
     }
 
@@ -61,9 +64,12 @@ class ImageRepository(application: Application) {
      * @param image Image to bookmark.
      */
     fun bookmark(image: SearchImage) {
-        CoroutineScope(IO).launch {
-            dao.bookmark(image)
+//        CoroutineScope(IO).launch {
+        Realm.getDefaultInstance().executeTransactionAsync {
+            it.copyToRealm(image)
         }
+        bookmarks.postValue(Realm.getDefaultInstance().where(SearchImage::class.java).findAll().toList())
+//        }
     }
 
     /**
@@ -72,8 +78,12 @@ class ImageRepository(application: Application) {
      * @param image Image to be removed from database.
      */
     fun removeBookmarked(image: SearchImage) {
-        CoroutineScope(IO).launch {
-            dao.removeBookmarked(image)
+//        CoroutineScope(IO).launch {
+        Realm.getDefaultInstance().executeTransactionAsync {
+            val images = it.where(SearchImage::class.java).equalTo("title", image.title).findAll()
+            images.deleteAllFromRealm()
         }
+        bookmarks.postValue(Realm.getDefaultInstance().where(SearchImage::class.java).findAll().toList())
+//        }
     }
 }

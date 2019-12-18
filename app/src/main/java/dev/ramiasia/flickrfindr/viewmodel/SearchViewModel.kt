@@ -48,6 +48,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
      * @param incognito Flag for whether the search term should be remembered and persisted.
      */
     fun getImages(term: String, incognito: Boolean) {
+        var incognitoFinal = incognito
         if (term.isNotEmpty()) {
             val list: ArrayList<SearchImage>?
             if (term != lastSearchedTerm) {
@@ -55,12 +56,14 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 list = ArrayList()
                 page = 1
             } else {
+                incognitoFinal = true
                 list = images.value
             }
 
+            if (!incognitoFinal) imageRepository.save(term)
+
             //Launch a coroutine on the IO thread for getting data from the images API
             CoroutineScope(IO).launch {
-                if (!incognito) imageRepository.save(term)
                 val imageDataInterface = RetrofitInstance.getRetrofitInstance()
                     .create(ImageDataInterface::class.java)
                 try {

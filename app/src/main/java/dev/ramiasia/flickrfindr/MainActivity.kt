@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import dev.ramiasia.flickrfindr.ui.bookmarks.BookmarkFragment
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -13,6 +14,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Initialize Realm (just once per application)
+        // Initialize Realm (just once per application)
+        Realm.init(application)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
         supportActionBar?.title = getString(R.string.bookmarks)

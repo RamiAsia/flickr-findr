@@ -5,14 +5,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+
+import io.realm.RealmObject;
 
 /**
  * Entity containing details about searched images.
  */
-@Entity(tableName = "bookmarks")
-public class SearchImage implements Parcelable {
+//@Entity(tableName = "bookmarks")
+public class SearchImage extends RealmObject implements Parcelable {
     public static final Creator<SearchImage> CREATOR = new Creator<SearchImage>() {
         @Override
         public SearchImage createFromParcel(Parcel in) {
@@ -28,9 +28,51 @@ public class SearchImage implements Parcelable {
     public String farm;
     public String server;
     public String secret;
-    @PrimaryKey
+
+    //    @PrimaryKey
     @NonNull
     public String id;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getFarm() {
+        return farm;
+    }
+
+    public void setFarm(String farm) {
+        this.farm = farm;
+    }
+
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    @NonNull
+    public String getId() {
+        return id;
+    }
+
+    public void setId(@NonNull String id) {
+        this.id = id;
+    }
 
     public SearchImage() {
 
